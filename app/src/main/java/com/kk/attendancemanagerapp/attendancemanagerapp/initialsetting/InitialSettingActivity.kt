@@ -1,9 +1,11 @@
 package com.kk.attendancemanagerapp.attendancemanagerapp.initialsetting
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.kk.attendancemanagerapp.attendancemanagerapp.R
+import com.kk.attendancemanagerapp.attendancemanagerapp.attendance.AttendanceActivity
 import com.kk.attendancemanagerapp.attendancemanagerapp.data.resource.DataRepository
 import com.kk.attendancemanagerapp.attendancemanagerapp.utils.ActivityUtil
 import com.kk.attendancemanagerapp.attendancemanagerapp.utils.ViewModelHolder
@@ -22,6 +24,10 @@ class InitialSettingActivity : AppCompatActivity(), InitialSettingNavigator {
 
         // viewModelを生成
         val viewModel: InitialSettingViewModel = findOrCreateViewModel()
+
+        // fragmentにviewModelをセット
+        fragment.setViewModel(viewModel)
+
         // コールバック返却用にNavigatorをセットする
         viewModel.setNavigator(this)
     }
@@ -71,6 +77,14 @@ class InitialSettingActivity : AppCompatActivity(), InitialSettingNavigator {
                 ViewModelHolder.createContainer(viewModel), TAG_VIEWMODEL_INITIAL_SETTING)
             viewModel
         }
+    }
+
+    /**
+     * 初期設定完了時の処理. ViewModelからのコールバック
+     */
+    override fun onComplete() {
+        val intent: Intent = Intent(applicationContext, AttendanceActivity::class.java)
+        startActivity(intent)
     }
 
     companion object {

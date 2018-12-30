@@ -1,166 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="10dp"
-        android:orientation="vertical"
-        tools:context=".initialsetting.InitialSettingFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- タイトル -->
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:text="@string/initial_setting_title"
-            android:textSize="@dimen/initial_setting_title_size"
-            android:textStyle="bold"/>
+    <data>
+        <import type="android.view.View"/>
 
-    <!-- ユーザー名 -->
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-        <TextView
-                android:layout_width="@dimen/initial_setting_text_width"
-                android:layout_height="wrap_content"
-                android:text="@string/initial_setting_user_text"/>
-
-        <EditText
-                android:id="@+id/user_edit_text"
-                android:layout_width="@dimen/initial_setting_edit_text_width"
-                android:layout_height="@dimen/initial_setting_edit_text_height"
-                android:layout_marginStart="@dimen/initial_setting_edit_text_margin_start"
-                android:singleLine="true"
-                android:gravity="center_horizontal"/>
-    </LinearLayout>
-
-    <!-- 出勤日 -->
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <TextView
-                android:layout_width="@dimen/initial_setting_text_width"
-                android:layout_height="wrap_content"
-                android:text="@string/initial_setting_attendance_date_text"/>
-    </LinearLayout>
-
-    <!-- 出勤時間 -->
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <TextView
-                android:layout_width="@dimen/initial_setting_text_width"
-                android:layout_height="wrap_content"
-                android:text="@string/initial_setting_attendance_time_text"/>
-
-        <EditText
-                android:id="@+id/attendance_time_edit_text"
-                android:layout_width="@dimen/initial_setting_edit_text_width"
-                android:layout_height="@dimen/initial_setting_edit_text_height"
-                android:layout_marginStart="@dimen/initial_setting_edit_text_margin_start"
-                android:inputType="none"
-                android:gravity="center_horizontal"/>
-    </LinearLayout>
-
-    <!-- 休憩時間 - START -->
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <TextView
-                android:layout_width="@dimen/initial_setting_text_width"
-                android:layout_height="wrap_content"
-                android:text="@string/initial_setting_break_time_text"/>
-
-        <EditText
-                android:id="@+id/break_time_start_edit_text"
-                android:layout_width="@dimen/initial_setting_edit_text_width"
-                android:layout_height="@dimen/initial_setting_edit_text_height"
-                android:layout_marginStart="@dimen/initial_setting_edit_text_margin_start"
-                android:inputType="time"
-                android:gravity="center_horizontal"/>
-    </LinearLayout>
-
-    <!-- 休憩時間 - END -->
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <TextView
-                android:layout_width="@dimen/initial_setting_text_width"
-                android:layout_height="wrap_content"/>
-
-        <EditText
-                android:id="@+id/break_time_end_edit_text"
-                android:layout_width="@dimen/initial_setting_edit_text_width"
-                android:layout_height="@dimen/initial_setting_edit_text_height"
-                android:layout_marginStart="@dimen/initial_setting_edit_text_margin_start"
-                android:inputType="time"
-                android:gravity="center_horizontal"/>
-    </LinearLayout>
-
-    <!-- 時間単位 -->
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <TextView
-                android:layout_width="@dimen/initial_setting_text_width"
-                android:layout_height="wrap_content"
-                android:text="@string/initial_setting_time_unit_text"/>
-    </LinearLayout>
-
-    <!-- 残り有給日数 -->
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <TextView
-                android:layout_width="@dimen/initial_setting_text_width"
-                android:layout_height="wrap_content"
-                android:text="@string/initial_setting_salaried_text"/>
-
-        <EditText
-                android:id="@+id/salaried_edit_text"
-                android:layout_width="@dimen/initial_setting_edit_text_width"
-                android:layout_height="@dimen/initial_setting_edit_text_height"
-                android:layout_marginStart="@dimen/initial_setting_edit_text_margin_start"
-                android:inputType="number"
-                android:gravity="center_horizontal"/>
-    </LinearLayout>
+        <variable
+                name="viewmodel"
+                type="com.kk.attendancemanagerapp.attendancemanagerapp.initialsetting.InitialSettingViewModel"/>
+    </data>
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="vertical"
+            tools:context=".initialsetting.InitialSettingFragment">
 
-        <Button
-                android:id="@+id/initial_setting_next_button"
+        <!-- タイトル -->
+        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/initial_setting_button_text"/>
-    </LinearLayout>
+                android:layout_marginVertical="20dp"
+                android:text="@string/initial_setting_title"
+                android:textSize="@dimen/initial_setting_title_size"
+                android:textStyle="bold"/>
 
-    <TextView
-            android:id="@+id/initial_setting_incomplete_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="14sp"
-            android:text="@string/initial_setting_incomplete_text"
-            android:visibility="gone"/>
-</LinearLayout>
+        <!-- ユーザー名 -->
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="@dimen/initial_setting_text_width"
+                    android:layout_height="wrap_content"
+                    android:text="@string/initial_setting_user_text"/>
+
+            <EditText
+                    android:id="@+id/user_edit_text"
+                    android:layout_width="@dimen/initial_setting_edit_text_width"
+                    android:layout_height="@dimen/initial_setting_edit_text_height"
+                    android:layout_marginStart="@dimen/initial_setting_edit_text_margin_start"
+                    android:singleLine="true"
+                    android:gravity="center_horizontal"
+                    android:text="@={viewmodel.mUserName}"/>
+        </LinearLayout>
+
+        <!-- 出勤日 -->
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="@dimen/initial_setting_text_width"
+                    android:layout_height="wrap_content"
+                    android:text="@string/initial_setting_attendance_date_text"/>
+        </LinearLayout>
+
+        <!-- 出勤時間 -->
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="@dimen/initial_setting_text_width"
+                    android:layout_height="wrap_content"
+                    android:text="@string/initial_setting_attendance_time_text"/>
+
+            <EditText
+                    android:id="@+id/attendance_time_edit_text"
+                    android:layout_width="@dimen/initial_setting_edit_text_width"
+                    android:layout_height="@dimen/initial_setting_edit_text_height"
+                    android:layout_marginStart="@dimen/initial_setting_edit_text_margin_start"
+                    android:inputType="none"
+                    android:gravity="center_horizontal"
+                    android:text="@={viewmodel.mAttendanceTime}"/>
+        </LinearLayout>
+
+        <!-- 休憩時間 - START -->
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="@dimen/initial_setting_text_width"
+                    android:layout_height="wrap_content"
+                    android:text="@string/initial_setting_break_time_text"/>
+
+            <EditText
+                    android:id="@+id/break_time_start_edit_text"
+                    android:layout_width="@dimen/initial_setting_edit_text_width"
+                    android:layout_height="@dimen/initial_setting_edit_text_height"
+                    android:layout_marginStart="@dimen/initial_setting_edit_text_margin_start"
+                    android:inputType="time"
+                    android:gravity="center_horizontal"
+                    android:text="@={viewmodel.mBreakStart}"/>
+        </LinearLayout>
+
+        <!-- 休憩時間 - END -->
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="@dimen/initial_setting_text_width"
+                    android:layout_height="wrap_content"/>
+
+            <EditText
+                    android:id="@+id/break_time_end_edit_text"
+                    android:layout_width="@dimen/initial_setting_edit_text_width"
+                    android:layout_height="@dimen/initial_setting_edit_text_height"
+                    android:layout_marginStart="@dimen/initial_setting_edit_text_margin_start"
+                    android:inputType="time"
+                    android:gravity="center_horizontal"
+                    android:text="@={viewmodel.mBreakEnd}"/>
+        </LinearLayout>
+
+        <!-- 時間単位 -->
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="@dimen/initial_setting_text_width"
+                    android:layout_height="wrap_content"
+                    android:text="@string/initial_setting_time_unit_text"/>
+        </LinearLayout>
+
+        <!-- 残り有給日数 -->
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="@dimen/initial_setting_text_width"
+                    android:layout_height="wrap_content"
+                    android:text="@string/initial_setting_salaried_text"/>
+
+            <EditText
+                    android:id="@+id/salaried_edit_text"
+                    android:layout_width="@dimen/initial_setting_edit_text_width"
+                    android:layout_height="@dimen/initial_setting_edit_text_height"
+                    android:layout_marginStart="@dimen/initial_setting_edit_text_margin_start"
+                    android:inputType="number"
+                    android:gravity="center_horizontal"
+                    android:text="@={viewmodel.mSalaried}"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
+
+            <Button
+                    android:id="@+id/initial_setting_next_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/initial_setting_button_text"
+                    android:onClick="@{() -> viewmodel.onClickNextButton()}"/>
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/initial_setting_incomplete_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="14sp"
+                android:text="@string/initial_setting_incomplete_text"
+                android:visibility="@{viewmodel.mIsIncompleteText ? View.VISIBLE : View.GONE}"/>
+    </LinearLayout>
+</layout>

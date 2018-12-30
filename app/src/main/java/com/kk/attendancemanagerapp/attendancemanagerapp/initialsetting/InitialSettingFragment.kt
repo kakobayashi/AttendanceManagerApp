@@ -1,99 +1,86 @@
 package com.kk.attendancemanagerapp.attendancemanagerapp.initialsetting
 
 import android.app.TimePickerDialog
-import android.content.Intent
+import android.databinding.ObservableField
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import com.kk.attendancemanagerapp.attendancemanagerapp.R
-import com.kk.attendancemanagerapp.attendancemanagerapp.attendance.AttendanceActivity
+import com.kk.attendancemanagerapp.attendancemanagerapp.databinding.FragmentInitialSettingBinding
 import com.kk.attendancemanagerapp.attendancemanagerapp.utils.TimePickerDialogUtil
 import java.util.*
 
 class InitialSettingFragment : Fragment() {
 
+    private lateinit var mViewModel: InitialSettingViewModel
+
+    private var mDataBinding: FragmentInitialSettingBinding? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val root: View? = inflater.inflate(R.layout.fragment_initial_setting, container, false)
 
-        val userNameEdit: EditText? = root?.findViewById(R.id.user_edit_text)
+        // bind
+        if (mDataBinding == null) {
+            mDataBinding = FragmentInitialSettingBinding.bind(root!!)
+        }
+
+        // binderにViewModelを設定する
+        mDataBinding?.viewmodel = mViewModel
 
         // 出勤時間
         val attendanceTimeEdit: EditText? = root?.findViewById(R.id.attendance_time_edit_text)
-        setupTimePickerDialog(attendanceTimeEdit)
+        setupTimePickerDialog(attendanceTimeEdit, mViewModel.mAttendanceTime)
 
         // 休憩開始時間
         val breakStartEdit: EditText? = root?.findViewById(R.id.break_time_start_edit_text)
-        setupTimePickerDialog(breakStartEdit)
+        setupTimePickerDialog(breakStartEdit, mViewModel.mBreakStart)
 
         // 休憩終了時間
         val breakEndEdit: EditText? = root?.findViewById(R.id.break_time_end_edit_text)
-        setupTimePickerDialog(breakEndEdit)
+        setupTimePickerDialog(breakEndEdit, mViewModel.mBreakEnd)
 
-        // 残り有給日数
-        val salariedEdit: EditText? = root?.findViewById(R.id.salaried_edit_text)
+        return mDataBinding?.root
+    }
 
-        val incompleteText: TextView? = root?.findViewById(R.id.initial_setting_incomplete_text)
-
-        val nextButton : Button? = root?.findViewById(R.id.initial_setting_next_button)
-        if (nextButton != null) {
-            nextButton.setOnClickListener(View.OnClickListener {
-                val userName: String = userNameEdit?.text.toString()
-                val attendanceTime: String = attendanceTimeEdit?.text.toString()
-                val breakStart: String = breakStartEdit?.text.toString()
-                val breakEnd: String = breakEndEdit?.text.toString()
-                val salaried: String = salariedEdit?.text.toString()
-
-                if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(attendanceTime) &&
-                    !TextUtils.isEmpty(breakStart) && !TextUtils.isEmpty(breakEnd) &&
-                    !TextUtils.isEmpty(salaried)) {
-                    // すべて入力されていた場合は次の画面へ移行
-                    val intent = Intent(context, AttendanceActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    // すべて入力されていない場合は警告テキストを表示
-                    incompleteText?.visibility = View.VISIBLE
-                }
-            })
-        }
-
-        return root
+    /**
+     * ViewModelのセット
+     * @param viewModel セットするViewModel
+     */
+    fun setViewModel(viewModel: InitialSettingViewModel) {
+        mViewModel = viewModel
     }
 
     /**
      * EditTextに設置するTimePickerDialogの設定
      * @param editText 対象の編集テキスト
+     * @param field    Binding編集テキスト文言
      */
-    private fun setupTimePickerDialog(editText: EditText?) {
+    private fun setupTimePickerDialog(editText: EditText?, field: ObservableField<String>?) {
         // キーボードを開かない
         editText?.keyListener = null
         editText?.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
-                showTimePickerDialog(editText)
+                showTimePickerDialog(field)
             }
-        }
-        editText?.setOnClickListener {
-            showTimePickerDialog(editText)
         }
     }
 
     /**
      * TimePickerDialogの表示
-     * @param editText 時間入力する編集テキスト
+     * @param field Binding編集テキスト
      */
-    private fun showTimePickerDialog(editText: EditText?) {
+    private fun showTimePickerDialog(field: ObservableField<String>?) {
         val calendar: Calendar = Calendar.getInstance()
         val hour: Int = calendar.get(Calendar.HOUR_OF_DAY)
         val minute: Int = calendar.get(Calendar.MINUTE)
-        val picker: TimePickerDialog = TimePickerDialog(context,
+        val picker = TimePickerDialog(context,
             TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                editText?.setText(TimePickerDialogUtil.createTimeToTwoDigits(hourOfDay, minute))
+                // viewmodelの変数に値をセットしてあげないといけない. データをbindしてあげる
+                field?.set(TimePickerDialogUtil.createTimeToTwoDigits(hourOfDay, minute))
             }, hour, minute, true)
         picker.show()
     }
