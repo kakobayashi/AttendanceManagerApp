@@ -14,6 +14,7 @@ class InitialSettingActivity : AppCompatActivity(), InitialSettingNavigator {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_initial_setting)
 
+        // ツールバーの設定
         setupToolbar()
 
         // fragmentを追加して取得する
