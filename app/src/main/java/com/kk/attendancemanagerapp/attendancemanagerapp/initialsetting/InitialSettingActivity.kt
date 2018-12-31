@@ -83,11 +83,24 @@ class InitialSettingActivity : AppCompatActivity(), InitialSettingNavigator {
      * 初期設定完了時の処理. ViewModelからのコールバック
      */
     override fun onComplete() {
-        val intent: Intent = Intent(applicationContext, AttendanceActivity::class.java)
-        startActivity(intent)
+        val intent = Intent(applicationContext, AttendanceActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivityForResult(intent, REQUEST_CODE_ATTENDANCE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_CODE_ATTENDANCE) {
+            finish()
+        }
     }
 
     companion object {
         const val TAG_VIEWMODEL_INITIAL_SETTING = "TAG_VIEWMODEL_INITIAL_SETTING"
+
+        // リクエストコード
+        const val REQUEST_CODE_ATTENDANCE: Int = 0
     }
+
 }

@@ -1,5 +1,7 @@
 package com.kk.attendancemanagerapp.attendancemanagerapp.utils
 
+import android.databinding.ObservableBoolean
+
 class TimePickerDialogUtil {
 
     companion object {
@@ -26,6 +28,21 @@ class TimePickerDialogUtil {
                 timeStr = "0$timeStr"
             }
             return timeStr
+        }
+
+        /**
+         * 出勤日の追加
+         * @param buffer StringBuffer
+         * @param data   曜日
+         * @return StringBuffer 0:OFF, 1:ON
+         */
+        fun appendAttendanceDate(buffer: StringBuffer, data: ObservableBoolean): StringBuffer {
+            if (data.get()) {
+                buffer.append("1")
+            } else {
+                buffer.append("0")
+            }
+            return buffer
         }
     }
 }
