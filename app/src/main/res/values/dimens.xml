@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 初期設定画面 -->
+    <dimen name="initial_setting_title_size">18sp</dimen>
+    <dimen name="initial_setting_content_duration">5dp</dimen>
+    <dimen name="initial_setting_text_width">100dp</dimen>
+    <dimen name="initial_setting_edit_text_width">150dp</dimen>
+    <dimen name="initial_setting_edit_text_height">50dp</dimen>
+    <dimen name="initial_setting_edit_text_margin_start">30dp</dimen>
+</resources>

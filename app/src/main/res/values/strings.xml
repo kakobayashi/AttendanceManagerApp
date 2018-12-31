@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">AttendanceManagerApp</string>
+
+    <string name="initial_setting_title">こんにちは\n初期設定を行なってください</string>
+    <string name="initial_setting_user_text">ユーザー名</string>
+    <string name="initial_setting_attendance_date_text">出勤日</string>
+    <string name="initial_setting_attendance_time_text">出勤時間</string>
+    <string name="initial_setting_break_time_text">休憩時間</string>
+    <string name="initial_setting_time_unit_text">時間単位</string>
+    <string name="initial_setting_salaried_text">残り有給日数</string>
+    <string name="initial_setting_button_text">設定する</string>
+    <string name="initial_setting_incomplete_text">すべての項目を入力してください。</string>
 </resources>
