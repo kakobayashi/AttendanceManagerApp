@@ -31,6 +31,19 @@ class TimePickerDialogUtil {
         }
 
         /**
+         * 時間を二桁に整形
+         * @param time 時間
+         * @return 二桁の時間
+         */
+        fun timeToTwoDigits(time: Long): String {
+            var timeStr = time.toString()
+            if (timeStr.length != 2) {
+                timeStr = "0$timeStr"
+            }
+            return timeStr
+        }
+
+        /**
          * 出勤日の追加
          * @param buffer StringBuffer
          * @param data   曜日

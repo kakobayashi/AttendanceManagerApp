@@ -25,6 +25,61 @@ class DataRepository: DataSource {
         pref.edit().putString(KEY_PREFERENCE_SALARIED, salaried).apply()
     }
 
+    /**
+     * 開始時間を保存
+     * @param pref SharedPreference
+     * @param time 開始ミリ秒
+     */
+    override fun saveCurrentTime(pref: SharedPreferences, time: Long) {
+        pref.edit().putLong(KEY_PREFERENCE_START_TIME, time).apply()
+    }
+
+    /**
+     * 勤務時間を取得
+     * @param pref SharedPreference
+     * @param time 終了ミリ秒
+     * @return 勤務時間
+     */
+    override fun getAttendanceTime(pref: SharedPreferences, time: Long): Long {
+        val startTime: Long = pref.getLong(KEY_PREFERENCE_START_TIME, 0)
+        return System.currentTimeMillis() - startTime
+    }
+
+    /**
+     * 本日の勤務時間を保存
+     * @param pref SharedPreference
+     * @param time 本日の勤務時間
+     */
+    override fun saveTodayAttendanceTime(pref: SharedPreferences, time: Long?) {
+        pref.edit().putLong(KEY_PREFERENCE_TODAY_ATTENDANCE_TIME, time!!).apply()
+    }
+
+    /**
+     * 本日の勤務時間を取得
+     * @param pref SharedPreference
+     * @return 本日の勤務時間のミリ秒
+     */
+    override fun getTodayAttendanceTime(pref: SharedPreferences): Long {
+        return pref.getLong(KEY_PREFERENCE_TODAY_ATTENDANCE_TIME, 0)
+    }
+
+    /**
+     * 初期設定完了
+     * @param pref SharedPreference
+     */
+    override fun setCompleteInitialSetting(pref: SharedPreferences) {
+        pref.edit().putBoolean(KEY_PREFERENCE_COMPLETE_INITIAL_SETTING, true).apply()
+    }
+
+    /**
+     * 初期設定完了かどうか
+     * @param pref SharedPreference
+     * @return true: 初期設定完了済み
+     */
+    override fun getCompleteInitialSetting(pref: SharedPreferences): Boolean {
+        return pref.getBoolean(KEY_PREFERENCE_COMPLETE_INITIAL_SETTING, false)
+    }
+
     companion object {
         // Preferenceキー
         const val KEY_PREFERENCE_SETTING_DATA = "key_preference_setting_data"
@@ -35,6 +90,15 @@ class DataRepository: DataSource {
         private const val KEY_PREFERENCE_BREAK_END = "key_preference_break_end"
         private const val KEY_PREFERENCE_TIME_UNIT = "key_preference_time_unit"
         private const val KEY_PREFERENCE_SALARIED = "key_preference_salaried"
+
+        // 開始時間
+        private const val KEY_PREFERENCE_START_TIME = "key_preference_start_time"
+
+        // 本日の勤務時間
+        private const val KEY_PREFERENCE_TODAY_ATTENDANCE_TIME = "key_preference_today_attendance_time"
+
+        // 初期設定完了
+        private const val KEY_PREFERENCE_COMPLETE_INITIAL_SETTING = "key_preference_complete_initial_setting"
 
         // singleTon
         private var sInstance: DataRepository? = null

@@ -30,6 +30,13 @@ class InitialSettingActivity : AppCompatActivity(), InitialSettingNavigator {
 
         // コールバック返却用にNavigatorをセットする
         viewModel.setNavigator(this)
+
+        // 初期設定完了済みの場合は、勤怠入力画面に遷移
+        if (viewModel.isCompleteInitialSetting() != null && viewModel.isCompleteInitialSetting()!!) {
+            val intent = Intent(applicationContext, AttendanceActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivityForResult(intent, REQUEST_CODE_ATTENDANCE)
+        }
     }
 
     /**
