@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import com.kk.attendancemanagerapp.attendancemanagerapp.manager.AppAlarmManager
 import com.kk.attendancemanagerapp.attendancemanagerapp.R
 import com.kk.attendancemanagerapp.attendancemanagerapp.attendance.AttendanceActivity
 import com.kk.attendancemanagerapp.attendancemanagerapp.data.resource.DataRepository
@@ -37,6 +38,10 @@ class InitialSettingActivity : AppCompatActivity(), InitialSettingNavigator {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivityForResult(intent, REQUEST_CODE_ATTENDANCE)
         }
+
+        // アラームセット
+        AppAlarmManager(applicationContext)
+            .setDailyAlarm()
     }
 
     /**

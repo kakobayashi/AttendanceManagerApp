@@ -64,6 +64,14 @@ class DataRepository: DataSource {
     }
 
     /**
+     * 本日の勤務時間の初期化
+     * @param pref SharedPreference
+     */
+    override fun clearTodayAttendanceTime(pref: SharedPreferences) {
+        pref.edit().putLong(KEY_PREFERENCE_TODAY_ATTENDANCE_TIME, 0).apply()
+    }
+
+    /**
      * 初期設定完了
      * @param pref SharedPreference
      */

@@ -3,7 +3,6 @@ package com.kk.attendancemanagerapp.attendancemanagerapp.utils
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class AppUtil {
     companion object {
         /**

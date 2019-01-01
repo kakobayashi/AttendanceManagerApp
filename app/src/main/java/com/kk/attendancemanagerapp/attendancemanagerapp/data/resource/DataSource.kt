@@ -15,6 +15,8 @@ interface DataSource {
 
     fun getTodayAttendanceTime(pref: SharedPreferences): Long
 
+    fun clearTodayAttendanceTime(pref: SharedPreferences)
+
     fun setCompleteInitialSetting(pref: SharedPreferences)
 
     fun getCompleteInitialSetting(pref: SharedPreferences): Boolean

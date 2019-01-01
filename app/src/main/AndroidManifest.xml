@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".attendance.AttendanceActivity">
         </activity>
+        <receiver android:name=".receiver.AppAlarmReceiver"/>
     </application>
 
 </manifest>
