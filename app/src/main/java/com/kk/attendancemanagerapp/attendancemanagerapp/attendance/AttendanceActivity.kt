@@ -9,8 +9,11 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import com.kk.attendancemanagerapp.attendancemanagerapp.R
+import com.kk.attendancemanagerapp.attendancemanagerapp.data.resource.DataRepository
+import com.kk.attendancemanagerapp.attendancemanagerapp.utils.ActivityUtil
+import com.kk.attendancemanagerapp.attendancemanagerapp.utils.ViewModelHolder
 
-class AttendanceActivity : AppCompatActivity() {
+class AttendanceActivity : AppCompatActivity(), AttendanceNavigator {
 
     private lateinit var mDrawerLayout: DrawerLayout
 
@@ -23,6 +26,18 @@ class AttendanceActivity : AppCompatActivity() {
 
         // ナビゲーションドロワーの設定
         setupNavigationDrawer()
+
+        // Fragment取得
+        val fragment: AttendanceFragment = findOrCreateViewFragment()
+
+        // ViewModel取得
+        val viewModel: AttendanceViewModel = findOrCreateViewModel()
+
+        // fragmentにviewModelをセット
+        fragment.setViewModel(viewModel)
+
+        // コールバック返却用にNavigatorをセットする
+        viewModel.setNavigator(this)
     }
 
     /**
@@ -76,5 +91,48 @@ class AttendanceActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    /**
+     * Fragmentを生成し、そのFragmentを返す
+     * @return 追加したフラグメント
+     */
+    private fun findOrCreateViewFragment(): AttendanceFragment {
+        var attendanceFragment
+                = supportFragmentManager.findFragmentById(R.id.content_frame) as AttendanceFragment?
+        if (attendanceFragment == null) {
+            attendanceFragment = AttendanceFragment.newInstance()
+
+            ActivityUtil.addFragmentToActivity(supportFragmentManager,
+                attendanceFragment, R.id.content_frame)
+        }
+
+        return attendanceFragment
+    }
+
+    /**
+     * ViewModelを生成して、そのViewModelを返す
+     * @return 追加したViewModel
+     */
+    @SuppressWarnings("unchecked")
+    private fun findOrCreateViewModel(): AttendanceViewModel {
+        val retainedViewModel: ViewModelHolder<AttendanceViewModel>? =
+            supportFragmentManager.findFragmentByTag(TAG_VIEWMODEL_ATTENDANCE)
+                    as ViewModelHolder<AttendanceViewModel>?
+
+        return if (retainedViewModel != null || retainedViewModel?.getViewModel() != null) {
+            retainedViewModel.getViewModel()!!
+        } else {
+            val viewModel = AttendanceViewModel(
+                DataRepository.getInstance(), applicationContext)
+            // 画面に反映
+            ActivityUtil.addFragmentToActivity(supportFragmentManager,
+                ViewModelHolder.createContainer(viewModel), TAG_VIEWMODEL_ATTENDANCE)
+            viewModel
+        }
+    }
+
+    companion object {
+        const val TAG_VIEWMODEL_ATTENDANCE: String = "tag_viewmodel_attendance"
     }
 }

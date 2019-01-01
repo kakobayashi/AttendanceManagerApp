@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">AttendanceManagerApp</string>
 
+    <!-- 初期設定画面 -->
     <string name="initial_setting_title">こんにちは\n初期設定を行なってください</string>
     <string name="initial_setting_user_text">ユーザー名</string>
     <string name="initial_setting_attendance_date_text">出勤日</string>
@@ -10,6 +11,15 @@
     <string name="initial_setting_salaried_text">残り有給日数</string>
     <string name="initial_setting_button_text">設定する</string>
     <string name="initial_setting_incomplete_text">すべての項目を入力してください。</string>
+
+    <!-- 勤怠入力画面 -->
+    <string name="attendance_start_button_start">出勤</string>
+    <string name="attendance_start_button_end">退勤</string>
+    <string name="attendance_attendance_starting">出勤中...</string>
+    <string name="attendance_usage_salaried">有給を使用</string>
+    <string name="attendance_output_xlsl">Excel出力</string>
+    <string name="attendance_attendance_time_today">本日の作業時間：</string>
+
 
     <!-- ナビゲーションドロワー -->
     <string name="navigation_drawer_basic_setting">基本設定</string>
