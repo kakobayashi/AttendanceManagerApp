@@ -1,5 +1,6 @@
 package com.kk.attendancemanagerapp.attendancemanagerapp.attendance
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -9,7 +10,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import com.kk.attendancemanagerapp.attendancemanagerapp.R
+import com.kk.attendancemanagerapp.attendancemanagerapp.basicsetting.BasicSettingActivity
 import com.kk.attendancemanagerapp.attendancemanagerapp.data.resource.DataRepository
+import com.kk.attendancemanagerapp.attendancemanagerapp.history.HistoryActivity
+import com.kk.attendancemanagerapp.attendancemanagerapp.templete.TempleteActivity
 import com.kk.attendancemanagerapp.attendancemanagerapp.utils.ActivityUtil
 import com.kk.attendancemanagerapp.attendancemanagerapp.utils.ViewModelHolder
 
@@ -71,10 +75,16 @@ class AttendanceActivity : AppCompatActivity(), AttendanceNavigator {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.list_navigation_menu_basic_setting -> {
+                    val intent = Intent(applicationContext, BasicSettingActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.list_navigation_menu_change_templete -> {
+                    val intent = Intent(applicationContext, TempleteActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.list_navigation_menu_edit_history -> {
+                    val intent = Intent(applicationContext, HistoryActivity::class.java)
+                    startActivity(intent)
                 }
             }
             mDrawerLayout.closeDrawers()
