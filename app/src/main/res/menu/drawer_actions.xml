@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/list_navigation_menu_basic_setting"
+            android:icon="@drawable/ic_menu"
+            android:title="@string/navigation_drawer_basic_setting" />
+    <item
+            android:id="@+id/list_navigation_menu_change_templete"
+            android:icon="@drawable/ic_menu"
+            android:title="@string/navigation_drawer_change_templete" />
+    <item
+            android:id="@+id/list_navigation_menu_edit_history"
+            android:icon="@drawable/ic_menu"
+            android:title="@string/navigation_drawer_edit_history" />
+</menu>

@@ -10,4 +10,9 @@
     <string name="initial_setting_salaried_text">残り有給日数</string>
     <string name="initial_setting_button_text">設定する</string>
     <string name="initial_setting_incomplete_text">すべての項目を入力してください。</string>
+
+    <!-- ナビゲーションドロワー -->
+    <string name="navigation_drawer_basic_setting">基本設定</string>
+    <string name="navigation_drawer_change_templete">テンプレート変更</string>
+    <string name="navigation_drawer_edit_history">履歴/編集</string>
 </resources>
