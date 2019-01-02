@@ -18,6 +18,15 @@
         </activity>
         <activity android:name=".attendance.AttendanceActivity">
         </activity>
+
+        <receiver android:name=".receiver.AppAlarmReceiver"/>
+
+        <activity android:name=".basicsetting.BasicSettingActivity">
+        </activity>
+        <activity android:name=".history.HistoryActivity">
+        </activity>
+        <activity android:name=".templete.TempleteActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import com.kk.attendancemanagerapp.attendancemanagerapp.manager.AppAlarmManager
 import com.kk.attendancemanagerapp.attendancemanagerapp.R
 import com.kk.attendancemanagerapp.attendancemanagerapp.attendance.AttendanceActivity
 import com.kk.attendancemanagerapp.attendancemanagerapp.data.resource.DataRepository
@@ -30,6 +31,17 @@ class InitialSettingActivity : AppCompatActivity(), InitialSettingNavigator {
 
         // コールバック返却用にNavigatorをセットする
         viewModel.setNavigator(this)
+
+        // 初期設定完了済みの場合は、勤怠入力画面に遷移
+        if (viewModel.isCompleteInitialSetting() != null && viewModel.isCompleteInitialSetting()!!) {
+            val intent = Intent(applicationContext, AttendanceActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivityForResult(intent, REQUEST_CODE_ATTENDANCE)
+        }
+
+        // アラームセット
+        AppAlarmManager(applicationContext)
+            .setDailyAlarm()
     }
 
     /**

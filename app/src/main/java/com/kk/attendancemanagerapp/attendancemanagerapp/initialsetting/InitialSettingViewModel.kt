@@ -55,6 +55,10 @@ class InitialSettingViewModel(repository: DataRepository?, context: Context)  {
             mNavigator?.onComplete()
             mIsIncompleteText.set(false)
 
+            // 初期設定完了済みフラグをたてる
+            mRepository?.setCompleteInitialSetting(mContext.getSharedPreferences(
+                DataRepository.KEY_PREFERENCE_SETTING_DATA, Context.MODE_PRIVATE))
+
             // 設定データを保存
             mRepository?.saveSettingData(mContext.getSharedPreferences(
                 DataRepository.KEY_PREFERENCE_SETTING_DATA, Context.MODE_PRIVATE), mUserName,
@@ -229,5 +233,21 @@ class InitialSettingViewModel(repository: DataRepository?, context: Context)  {
         TimePickerDialogUtil.appendAttendanceDate(buffer, mSelectSunday)
 
         return buffer.toString()
+    }
+
+    /**
+     * 初期設定完了フラグをたてる
+     */
+    fun setCompleteInitialSetting() {
+        mRepository?.setCompleteInitialSetting(mContext.getSharedPreferences(
+            DataRepository.KEY_PREFERENCE_SETTING_DATA, Context.MODE_PRIVATE))
+    }
+
+    /**
+     * 初期設定完了済みか
+     */
+    fun isCompleteInitialSetting(): Boolean? {
+        return mRepository?.getCompleteInitialSetting(mContext.getSharedPreferences(
+            DataRepository.KEY_PREFERENCE_SETTING_DATA, Context.MODE_PRIVATE))
     }
 }
