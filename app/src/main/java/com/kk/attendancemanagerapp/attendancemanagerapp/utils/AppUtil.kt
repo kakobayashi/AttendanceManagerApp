@@ -22,9 +22,13 @@ class AppUtil {
          */
         fun convertTimeToString(time: Long?): String {
             if (time != null) {
-                val sec = time / 1000L
+                var sec = time / 1000L
                 val min = sec / 60L
                 val hour = min / 60L
+
+                if (sec >= 60) {
+                    sec %= 60
+                }
 
                 return TimePickerDialogUtil.timeToTwoDigits(hour) + ":" +
                         TimePickerDialogUtil.timeToTwoDigits(min) + ":" +

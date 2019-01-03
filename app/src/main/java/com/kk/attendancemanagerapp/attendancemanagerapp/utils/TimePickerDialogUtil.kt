@@ -24,7 +24,7 @@ class TimePickerDialogUtil {
          */
         fun timeToTwoDigits(time: Int): String {
             var timeStr = time.toString()
-            if (timeStr.length != 2) {
+            if (timeStr.length < 2) {
                 timeStr = "0$timeStr"
             }
             return timeStr
@@ -37,7 +37,7 @@ class TimePickerDialogUtil {
          */
         fun timeToTwoDigits(time: Long): String {
             var timeStr = time.toString()
-            if (timeStr.length != 2) {
+            if (timeStr.length < 2) {
                 timeStr = "0$timeStr"
             }
             return timeStr

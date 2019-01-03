@@ -29,6 +29,8 @@ class AttendanceFragment : Fragment() {
         mDataBinding?.viewmodel = mViewModel
 
         mViewModel.setTodayDate(AppUtil.getTodayDate())
+        mViewModel.setupStartFlag()
+        mViewModel.setupAttendanceTime()
 
         return mDataBinding?.root
     }

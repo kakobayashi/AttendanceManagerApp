@@ -20,4 +20,8 @@ interface DataSource {
     fun setCompleteInitialSetting(pref: SharedPreferences)
 
     fun getCompleteInitialSetting(pref: SharedPreferences): Boolean
+
+    fun isStartAttendance(pref: SharedPreferences): Boolean
+
+    fun setIsStartAttendance(pref: SharedPreferences, isStart: Boolean)
 }
