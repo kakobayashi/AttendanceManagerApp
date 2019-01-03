@@ -88,6 +88,24 @@ class DataRepository: DataSource {
         return pref.getBoolean(KEY_PREFERENCE_COMPLETE_INITIAL_SETTING, false)
     }
 
+    /**
+     * 出勤中かどうか
+     * @param pref SharedPreference
+     * @return true: 出勤中
+     */
+    override fun isStartAttendance(pref: SharedPreferences): Boolean {
+        return pref.getBoolean(KEY_PREFERENCE_IS_START_ATTENDANCE, false)
+    }
+
+    /**
+     * 出勤中かどうかをセット
+     * @param pref    SharedPreference
+     * @param isStart 出勤中フラグ
+     */
+    override fun setIsStartAttendance(pref: SharedPreferences, isStart: Boolean) {
+        pref.edit().putBoolean(KEY_PREFERENCE_IS_START_ATTENDANCE, isStart).apply()
+    }
+
     companion object {
         // Preferenceキー
         const val KEY_PREFERENCE_SETTING_DATA = "key_preference_setting_data"
@@ -98,6 +116,7 @@ class DataRepository: DataSource {
         private const val KEY_PREFERENCE_BREAK_END = "key_preference_break_end"
         private const val KEY_PREFERENCE_TIME_UNIT = "key_preference_time_unit"
         private const val KEY_PREFERENCE_SALARIED = "key_preference_salaried"
+        private const val KEY_PREFERENCE_IS_START_ATTENDANCE = "key_preference_is_start_attendance"
 
         // 開始時間
         private const val KEY_PREFERENCE_START_TIME = "key_preference_start_time"
