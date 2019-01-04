@@ -25,4 +25,7 @@
     <string name="navigation_drawer_basic_setting">基本設定</string>
     <string name="navigation_drawer_change_templete">テンプレート変更</string>
     <string name="navigation_drawer_edit_history">履歴/編集</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
