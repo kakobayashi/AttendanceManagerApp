@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="basic_setting_item_list">
+        <item>ユーザー名</item>
+        <item>出勤日</item>
+        <item>出勤時間</item>
+        <item>休憩時間</item>
+        <item>時間単位</item>
+        <item>有給残り</item>
+    </array>
+</resources>
