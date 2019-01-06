@@ -95,4 +95,9 @@ class AttendanceViewModel(repository: DataRepository?, context: Context) {
         // 本日の勤務時間をUI反映する
         mTodayAttendanceTime.set(AppUtil.convertTimeToString(timeToday))
     }
+
+    fun onClickOutputButton() {
+//        val writer: XlsxWriter = XlsxWriter()
+//        writer.createXlsx()
+    }
 }
