@@ -63,7 +63,8 @@
             <Button
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:text="@string/attendance_output_xlsl"/>
+                    android:text="@string/attendance_output_xlsl"
+                    android:onClick="@{() -> viewmodel.onClickOutputButton()}"/>
         </LinearLayout>
 
         <LinearLayout
