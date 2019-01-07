@@ -55,7 +55,6 @@ class BasicSettingActivity : AppCompatActivity(), BasicSettingNavigator {
         return super.onOptionsItemSelected(item)
     }
 
-
     /**
      * Fragmentを生成し、そのFragmentを返す
      * @return 追加したフラグメント
