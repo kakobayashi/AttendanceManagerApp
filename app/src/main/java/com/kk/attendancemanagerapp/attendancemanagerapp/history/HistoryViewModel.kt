@@ -1,6 +1,7 @@
 package com.kk.attendancemanagerapp.attendancemanagerapp.history
 
 import android.content.Context
+import com.kk.attendancemanagerapp.attendancemanagerapp.data.HistoryAttendance
 import com.kk.attendancemanagerapp.attendancemanagerapp.data.resource.DataRepository
 
 class HistoryViewModel(repository: DataRepository?, context: Context) {
@@ -16,5 +17,14 @@ class HistoryViewModel(repository: DataRepository?, context: Context) {
      */
     fun setNavigator(navigator: HistoryNavigator) {
         mNavigator = navigator
+    }
+
+    /**
+     * 過去の勤務時間リストを取得
+     * @param context コンテキスト
+     * @return 日付/勤務時間リスト
+     */
+    fun getHistoryAttendance(context: Context): ArrayList<HistoryAttendance> {
+        return mRepository!!.getHistoryAttendanceList(context)
     }
 }

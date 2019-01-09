@@ -1,6 +1,8 @@
 package com.kk.attendancemanagerapp.attendancemanagerapp.data.resource
 
+import android.content.Context
 import android.content.SharedPreferences
+import com.kk.attendancemanagerapp.attendancemanagerapp.data.HistoryAttendance
 
 interface DataSource {
 
@@ -24,4 +26,12 @@ interface DataSource {
     fun isStartAttendance(pref: SharedPreferences): Boolean
 
     fun setIsStartAttendance(pref: SharedPreferences, isStart: Boolean)
+
+    fun setAttendanceTimeToDB(context: Context, time: String)
+
+    fun getAttendanceDateToDB(context: Context): ArrayList<String>
+
+    fun getAttendanceTimeToDB(context: Context): ArrayList<String>
+
+    fun getHistoryAttendanceList(context: Context): ArrayList<HistoryAttendance>
 }
