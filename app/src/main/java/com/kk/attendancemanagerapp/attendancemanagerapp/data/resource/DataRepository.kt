@@ -1,6 +1,13 @@
 package com.kk.attendancemanagerapp.attendancemanagerapp.data.resource
 
+import android.content.ContentValues
+import android.content.Context
 import android.content.SharedPreferences
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
+import com.kk.attendancemanagerapp.attendancemanagerapp.data.HistoryAttendance
+import com.kk.attendancemanagerapp.attendancemanagerapp.utils.AppUtil
+import com.kk.attendancemanagerapp.attendancemanagerapp.utils.DatabaseHelper
 
 class DataRepository: DataSource {
 
@@ -104,6 +111,106 @@ class DataRepository: DataSource {
      */
     override fun setIsStartAttendance(pref: SharedPreferences, isStart: Boolean) {
         pref.edit().putBoolean(KEY_PREFERENCE_IS_START_ATTENDANCE, isStart).apply()
+    }
+
+    /**
+     * 本日の勤務時間と日付をDBに保存
+     * @param context コンテキスト
+     * @param time    本日の勤務時間
+     */
+    override fun setAttendanceTimeToDB(context: Context, time: String) {
+        val dbHelper = DatabaseHelper(context)
+        val writer: SQLiteDatabase = dbHelper.writableDatabase
+
+        val values = ContentValues()
+        values.put(DatabaseHelper.AttendanceTable.COLUMN_NAME_DATE.value, AppUtil.getYesterdayDate())
+        values.put(DatabaseHelper.AttendanceTable.COLUMN_NAME_ATTENDANCE_TIME.value, time)
+        android.util.Log.d("kkkk", "set time: " + time + ", " + AppUtil.getYesterdayDate())
+        writer.insert(DatabaseHelper.AttendanceTable.TABLE_NAME.value, null, values)
+    }
+
+    /**
+     * 勤務時間日付をDBから取得
+     * @param context コンテキスト
+     * @return 日付リスト
+     */
+    override fun getAttendanceDateToDB(context: Context): ArrayList<String> {
+        val dbHelper: DatabaseHelper = DatabaseHelper(context)
+        val reader: SQLiteDatabase = dbHelper.readableDatabase
+
+        // DBの日付を全件取得する
+        val projection: Array<String> = arrayOf(
+            DatabaseHelper.AttendanceTable.COLUMN_NAME_DATE.value)
+        val cursor: Cursor? = reader.query(
+            DatabaseHelper.AttendanceTable.TABLE_NAME.value,
+            projection,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null)
+
+        val list: ArrayList<String> = ArrayList()
+        while (cursor!!.moveToNext()) {
+            list.add(cursor.getString(cursor.getColumnIndexOrThrow(
+                DatabaseHelper.AttendanceTable.COLUMN_NAME_DATE.value)))
+        }
+        cursor.close()
+
+        return list
+    }
+
+    /**
+     * 勤務時間をDBから取得
+     * @param context コンテキスト
+     * @return 勤務時間リスト
+     */
+    override fun getAttendanceTimeToDB(context: Context): ArrayList<String> {
+        val dbHelper = DatabaseHelper(context)
+        val reader: SQLiteDatabase = dbHelper.readableDatabase
+
+        // DBの時間を全件取得する
+        val projection: Array<String> = arrayOf(
+            DatabaseHelper.AttendanceTable.COLUMN_NAME_ATTENDANCE_TIME.value)
+        val cursor: Cursor? = reader.query(
+            DatabaseHelper.AttendanceTable.TABLE_NAME.value,
+            projection,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null)
+
+        val list: ArrayList<String> = ArrayList()
+        while (cursor!!.moveToNext()) {
+            list.add(cursor.getString(cursor.getColumnIndexOrThrow(
+                DatabaseHelper.AttendanceTable.COLUMN_NAME_ATTENDANCE_TIME.value)))
+        }
+        cursor.close()
+
+        return list
+    }
+
+    /**
+     * 過去の勤務時間リストを取得する
+     * @param context コンテキスト
+     * @return 日時/勤務時間リスト
+     */
+    override fun getHistoryAttendanceList(context: Context): ArrayList<HistoryAttendance> {
+        val dateList: ArrayList<String> = getAttendanceDateToDB(context)
+        val timeList: ArrayList<String> = getAttendanceTimeToDB(context)
+
+        val list: ArrayList<HistoryAttendance> = ArrayList()
+        var i = 0
+        dateList.forEach { _ ->
+            val attendance = HistoryAttendance(dateList[i], timeList[i])
+            list.add(attendance)
+            i++
+        }
+
+        return list
     }
 
     companion object {

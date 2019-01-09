@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ListView
 import com.kk.attendancemanagerapp.attendancemanagerapp.R
+import com.kk.attendancemanagerapp.attendancemanagerapp.data.HistoryAttendance
 import com.kk.attendancemanagerapp.attendancemanagerapp.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
@@ -35,6 +36,14 @@ class HistoryFragment : Fragment() {
 
         // リストビューにアダプターを設定する
         mListView = root?.findViewById(R.id.history_list)
+
+        // 過去の勤務時間記録を取得する
+        val attendanceList: ArrayList<HistoryAttendance> = mViewModel.getHistoryAttendance(context!!)
+
+        // adapterを設定
+        val historyAdapter = HistoryListAdapter(context!!, R.layout.item_history, attendanceList)
+        mListView?.adapter = historyAdapter
+        mListView?.onItemClickListener = mListener
 
         return mDataBinding?.root
     }
